@@ -52,50 +52,7 @@ const revealObserver = new IntersectionObserver((entries) => {
 revealElements.forEach((element) => {
     revealObserver.observe(element);
 });
-// Hero typing animation
-const typingText = document.getElementById("typing-text");
 
-if (typingText) {
-    const phrases = [
-        "Artificial Intelligence Student",
-        "Future AI Developer",
-        "Creative Problem Solver"
-    ];
-
-    let phraseIndex = 0;
-    let characterIndex = phrases[0].length;
-    let deleting = true;
-
-    function typeEffect() {
-        const currentPhrase = phrases[phraseIndex];
-
-        if (deleting) {
-            characterIndex--;
-            typingText.textContent = currentPhrase.substring(0, characterIndex);
-
-            if (characterIndex <= 0) {
-                deleting = false;
-                phraseIndex = (phraseIndex + 1) % phrases.length;
-                setTimeout(typeEffect, 500);
-                return;
-            }
-        } else {
-            const nextPhrase = phrases[phraseIndex];
-            characterIndex++;
-            typingText.textContent = nextPhrase.substring(0, characterIndex);
-
-            if (characterIndex >= nextPhrase.length) {
-                deleting = true;
-                setTimeout(typeEffect, 1800);
-                return;
-            }
-        }
-
-        setTimeout(typeEffect, deleting ? 45 : 75);
-    }
-
-    setTimeout(typeEffect, 1800);
-}
 
 /* 3D Skill Card Interaction */
 const skillCards = document.querySelectorAll(".skills-grid .skill-card");
@@ -138,21 +95,22 @@ if (backToTop) {
     });
 }
 
+
 /* Loading Screen */
-window.addEventListener("load", () => {
+
+window.addEventListener("load", function () {
     const loadingScreen = document.getElementById("loading-screen");
 
-    if (loadingScreen) {
-        setTimeout(() => {
-            loadingScreen.style.opacity = "0";
-            loadingScreen.style.visibility = "hidden";
+    if (!loadingScreen) return;
 
-            setTimeout(() => {
-                loadingScreen.remove();
-            }, 600);
-        }, 800);
-    }
+    loadingScreen.style.opacity = "0";
+    loadingScreen.style.visibility = "hidden";
+
+    setTimeout(function () {
+        loadingScreen.remove();
+    }, 600);
 });
+
 
 // Active Navigation on Scroll
 const navLinks = document.querySelectorAll("nav a[href^='#']");
@@ -179,3 +137,159 @@ function updateActiveNav() {
 
 window.addEventListener("scroll", updateActiveNav);
 window.addEventListener("load", updateActiveNav);
+
+
+/* PURPLE CURSOR FOLLOW */
+
+const cursorGlow = document.querySelector(".cursor-glow");
+
+if (cursorGlow) {
+    document.addEventListener("mousemove", function (event) {
+        cursorGlow.style.left = event.clientX + "px";
+        cursorGlow.style.top = event.clientY + "px";
+    });
+}
+
+/* PURPLE SCROLL PROGRESS */
+
+const scrollProgress = document.getElementById("scroll-progress");
+
+function updateScrollProgress() {
+    if (!scrollProgress) return;
+
+    const scrollableHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
+
+    const progress = scrollableHeight > 0
+        ? (window.scrollY / scrollableHeight) * 100
+        : 0;
+
+    scrollProgress.style.width = progress + "%";
+}
+
+window.addEventListener("scroll", updateScrollProgress);
+window.addEventListener("resize", updateScrollProgress);
+window.addEventListener("load", updateScrollProgress);
+
+updateScrollProgress();
+
+/* HERO TYPING ANIMATION */
+
+const typingText = document.getElementById("typing-text");
+
+if (typingText) {
+    const phrases = [
+        "Artificial Intelligence Student",
+        "Future AI Engineer",
+        "Web Developer in Progress"
+    ];
+
+    let phraseIndex = 0;
+    let characterIndex = phrases[0].length;
+    let deleting = false;
+
+    function typeEffect() {
+        const currentPhrase = phrases[phraseIndex];
+
+        if (deleting) {
+            characterIndex--;
+        } else {
+            characterIndex++;
+        }
+
+        typingText.textContent = currentPhrase.substring(0, characterIndex);
+
+        let delay = deleting ? 35 : 65;
+
+        if (!deleting && characterIndex === currentPhrase.length) {
+            deleting = true;
+            delay = 1600;
+        } else if (deleting && characterIndex === 0) {
+            deleting = false;
+            phraseIndex = (phraseIndex + 1) % phrases.length;
+            delay = 350;
+        }
+
+        setTimeout(typeEffect, delay);
+    }
+
+    setTimeout(typeEffect, 1800);
+}
+
+/* PROJECT CARD MOUSE GLOW */
+
+document.querySelectorAll(".project-card").forEach((card) => {
+    card.addEventListener("mousemove", (event) => {
+        const rect = card.getBoundingClientRect();
+
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+
+        card.style.setProperty("--mouse-x", `${x}px`);
+        card.style.setProperty("--mouse-y", `${y}px`);
+    });
+});
+
+/* AI TERMINAL COMMANDS */
+
+const terminalForm = document.getElementById("terminal-form");
+const terminalInput = document.getElementById("terminal-input");
+const terminalOutput = document.getElementById("terminal-output");
+
+if (terminalForm && terminalInput && terminalOutput) {
+    terminalForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const command = terminalInput.value.trim().toLowerCase();
+
+        if (!command) return;
+
+        const commandLine = document.createElement("p");
+        commandLine.innerHTML =
+            '<span class="terminal-purple">roj@portfolio:~$</span> ' +
+            command.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+        terminalOutput.appendChild(commandLine);
+
+        const response = document.createElement("p");
+
+        switch (command) {
+            case "help":
+                response.textContent = "Commands: About, Skills, Projects, Contact, Clear";
+                break;
+
+            case "about":
+                response.textContent =
+                    "I'm Roj Wrya, an AI student interested in programming and technology.";
+                break;
+
+            case "skills":
+                response.textContent = "Exploring C++, HTML, CSS, JavaScript, and Artificial Intelligence.";
+                break;
+
+            case "projects":
+                response.textContent = "Check out the Projects section on this portfolio.";
+                break;
+
+            case "contact":
+                response.textContent = "Scroll to the Contact section to connect with me.";
+                break;
+
+            case "clear":
+                terminalOutput.innerHTML = "";
+                terminalInput.value = "";
+                terminalInput.focus();
+                return;
+
+            default:
+                response.textContent =
+                    "Command not found. Type 'help' to see available commands.";
+        }
+
+        terminalOutput.appendChild(response);
+        terminalInput.value = "";
+        terminalOutput.scrollTop = terminalOutput.scrollHeight;
+    });
+}
+
+

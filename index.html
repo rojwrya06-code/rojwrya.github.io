@@ -10,7 +10,7 @@
 
 </head>
 <body>
-
+    <div id="scroll-progress"></div>
     <nav class="navbar">
         <a href="#" class="logo">RW<span>.</span></a>
 
@@ -28,7 +28,7 @@
 
         <p class="label">WELCOME TO MY WORLD</p>
 
-        <h1>Hi, I'm <span>Roj Wrya.</span></h1>
+        <h1>Hi, I'm <span class="name-glow">Roj Wrya.</span></h1>
 
         <h2 class="hero-subtitle">
             <span id="typing-text">Artificial Intelligence Student</span><span class="typing-cursor">|</span>
@@ -76,7 +76,7 @@
 
         <div class="skills-grid">
             <div class="skill-card">
-                <span class="skill-icon">⚙️</span>
+                <span class="skill-icon">💻</span>
                 <h3>C++</h3>
                 <p>Programming fundamentals and problem solving.</p>
                 <span class="skill-tag">Programming</span>
@@ -130,6 +130,39 @@
         </div>
     </section>
 
+    <!-- AI TERMINAL -->
+    <section id="ai-terminal">
+        <p class="label">INTERACTIVE AI</p>
+        <h2>Enter the <span class="blue">Terminal.</span></h2>
+        <p class="terminal-intro">A little interactive corner of my digital world.</p>
+
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <span class="terminal-title">roj@portfolio: ~</span>
+            </div>
+
+            <div class="terminal-body" id="terminal-output">
+                <p>Welcome to Roj's AI terminal.</p>
+                <p>Type <span class="terminal-purple">help</span> to see available commands.</p>
+            </div>
+
+            <form id="terminal-form" class="terminal-input-line">
+                <label for="terminal-input">roj@portfolio:~$</label>
+                <input type="text"
+                       id="terminal-input"
+                       placeholder="Type a command..."
+                       autocomplete="off"
+                       spellcheck="false">
+            </form>
+        </div>
+    </section>
+    <!-- END AI TERMINAL -->
+
     <section id="projects">
         <p class="label">WHAT I CREATE</p>
         <h2>My <span class="blue">Projects.</span></h2>
@@ -137,22 +170,26 @@
         <div class="projects-grid">
             <div class="project-card">
                 <span class="project-number">01</span>
-                <h3>C++ Programming</h3>
-                <p>Building a strong foundation in programming, problem-solving, and algorithms.</p>
+                <h3>C++ Learning Journey</h3>
+                <p>Developing my C++ skills through programming fundamentals, logical thinking, and hands-on coding practice.</p>
                 <span class="project-tag">Currently Learning</span>
             </div>
 
             <div class="project-card">
                 <span class="project-number">02</span>
                 <h3>Personal Portfolio</h3>
-                <p>Creating my own website to showcase my journey, skills, and future projects.</p>
+                <p>Designing and developing a personal portfolio using HTML, CSS, and JavaScript, with a futuristic purple theme and responsive layouts.</p>
                 <span class="project-tag">In Progress</span>
+
+                <a href="https://rojwrya06-code.github.io/rojwrya.github.io/" class="project-link" target="_blank" rel="noopener noreferrer">
+                    Explore My Portfolio ↗
+                </a>
             </div>
 
             <div class="project-card">
                 <span class="project-number">03</span>
                 <h3>Artificial Intelligence</h3>
-                <p>Exploring AI concepts and developing the skills to build intelligent applications.</p>
+                <p>Learning the foundations of artificial intelligence, machine learning, and how intelligent systems solve real-world problems.</p>
                 <span class="project-tag">Future Goal</span>
             </div>
         </div>
@@ -194,7 +231,7 @@
                 </svg>
             </a>
 
-            <a href="mailto:rojwrya06@gmail.com" aria-label="Email">
+            <a href="mailto:rojwrya06@gmail.com" aria-label="Gmail">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                     <rect x="2.5" y="5" width="19" height="14" rx="2"
                           fill="none" stroke="currentColor" stroke-width="2" />
@@ -235,5 +272,7 @@
     </div>
 
     <script src="script.js"></script>
+    <div class="cursor-glow"></div>
+    <button id="backToTop" aria-label="Back to top">↑</button>
 </body>
 </html>
