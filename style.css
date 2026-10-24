@@ -152,23 +152,45 @@
         margin-top: 30px;
     }
 
-    .hobby {
-        padding: 16px 24px;
-        background: linear-gradient(135deg, #211238, #110b20);
-        border: 1px solid #49316b;
-        border-radius: 12px;
-        color: #e2ecff;
-        font-size: 16px;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px #00000020;
+.hobby {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 58px;
+    width: 170px;
+    padding: 14px 12px;
+    background: linear-gradient(135deg, #211238, #110b20);
+    border: 1px solid #49316b;
+    border-radius: 12px;
+    color: #e2ecff;
+    font-size: 16px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px #00000020;
+}
+
+    .hobby:hover {
+        transform: translateY(-5px);
+        border-color: #C084FC;
+        box-shadow: 0 8px 25px #A855F740;
+        background: #2a1742;
     }
 
-        .hobby:hover {
-            transform: translateY(-5px);
-            border-color: #C084FC;
-            box-shadow: 0 8px 25px #A855F740;
-            background: #2a1742;
-        }
+@media (max-width: 600px) {
+    .hobbies-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .hobby {
+        width: 100%;
+        min-height: 58px;
+        padding: 12px 6px;
+        font-size: 14px;
+    }
+}
     /* SOCIAL ICONS */
 
     .social-links {
@@ -550,12 +572,13 @@
         box-shadow: 0 0 20px rgba(192, 132, 252, 0.65), 0 0 45px rgba(124, 58, 237, 0.4);
     }
 
-    @media (max-width: 600px) {
-        .profile-avatar {
-            width: 200px;
-            height: 200px;
-        }
+@media (max-width: 600px) {
+    .profile-avatar {
+        width: 160px;
+        height: 160px;
+        margin-top: 20px;
     }
+}
     /* Purple neon effects */
     button,
     .btn,
@@ -1282,7 +1305,7 @@ body {
 /* GENTLE AVATAR FLOAT */
 
 .profile-avatar {
-    animation: avatarGlow 3s ease-in-out infinite alternate, avatarFloat 4s ease-in-out infinite;
+    animation: avatarGlow 3s ease-in-out infinite alternate;
 }
 
 @keyframes avatarFloat {
